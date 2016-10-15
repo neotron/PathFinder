@@ -20,25 +20,25 @@ class Node
 			be evaluated when reconstituing the path form the goal.
 			@param[in] parent Pointer to the node to assign as the parent.
 		*/
-		void setParent(Node* parent);
+        virtual void setParent(Node* parent);
 
 		/**
 			@brief Returns a pointer to the parent node.
 			@return A pointer to the parent node.
 		*/
-		Node* getParent() const;
+		virtual Node* getParent() const;
 
 		/**
 			@brief Add a node to the children of the current node.
 			@param[in] child A pointer to the child.
 		*/
-		void addChild(Node* child, float distance);
+		virtual void addChild(Node* child, float distance);
 
 		/**
 			@brief Returns a vector containing all the children of the current node.
 			@return A vector of Node pointers.
 		*/
-		std::vector<std::pair<Node*, float>>& getChildren();
+		virtual std::vector<std::pair<Node*, float>>& getChildren();
 
 	protected:
 

@@ -63,10 +63,9 @@ class Dijkstra : public PathAlgorithm<DijkstraNode>
 {
 	public:
 
-		static Dijkstra& getInstance()
+		static Dijkstra getInstance()
 		{
-			static Dijkstra instance;
-			return instance;
+			return Dijkstra();
 		}
 
 		bool getPath(DijkstraNode* start, DijkstraNode* goal, std::vector<DijkstraNode*>& path);

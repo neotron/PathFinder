@@ -110,19 +110,18 @@ class AStar : public PathAlgorithm<AStarNode>
 {
 	public:
 
-		static AStar& getInstance()
+		static AStar getInstance()
 		{
-			static AStar instance;
-			return instance;
+			return AStar();
 		}
 
 		bool getPath(AStarNode* start, AStarNode* goal, std::vector<AStarNode*>& path);
 		void clear();
+	    ~AStar();
 
 	private:
 
 		AStar();
-		~AStar();
 
 		void releaseNodes();
 		void pushOpen(AStarNode* node);

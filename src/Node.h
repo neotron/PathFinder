@@ -8,52 +8,52 @@
 
 	@see AStarNode
 */
-class Node
-{
-	public:
+class Node {
+public:
 
-		Node();
-		virtual ~Node();
+    Node();
 
-		/**
-			@brief Assigns the parent of the node. The parent of a node will
-			be evaluated when reconstituing the path form the goal.
-			@param[in] parent Pointer to the node to assign as the parent.
-		*/
-        virtual void setParent(Node* parent);
+    virtual ~Node();
 
-		/**
-			@brief Returns a pointer to the parent node.
-			@return A pointer to the parent node.
-		*/
-		virtual Node* getParent() const;
+    /**
+        @brief Assigns the parent of the node. The parent of a node will
+        be evaluated when reconstituing the path form the goal.
+        @param[in] parent Pointer to the node to assign as the parent.
+    */
+    virtual void setParent(Node *parent);
 
-		/**
-			@brief Add a node to the children of the current node.
-			@param[in] child A pointer to the child.
-		*/
-		virtual void addChild(Node* child, float distance);
+    /**
+        @brief Returns a pointer to the parent node.
+        @return A pointer to the parent node.
+    */
+    virtual Node *getParent() const;
 
-		/**
-			@brief Returns a vector containing all the children of the current node.
-			@return A vector of Node pointers.
-		*/
-		virtual std::vector<std::pair<Node*, float>>& getChildren();
+    /**
+        @brief Add a node to the children of the current node.
+        @param[in] child A pointer to the child.
+    */
+    virtual void addChild(Node *child, float distance);
 
-	protected:
+    /**
+        @brief Returns a vector containing all the children of the current node.
+        @return A vector of Node pointers.
+    */
+    virtual std::vector<std::pair<Node *, float>> &getChildren();
 
-		/**
-			@brief Clears the children of the node.
-		*/
-		void clearChildren();
+protected:
 
-		/**
-			Pointer to the parent node.
-		*/
-		Node* m_parent;
+    /**
+        @brief Clears the children of the node.
+    */
+    void clearChildren();
 
-		/**
-			List of all the node's children.
-		*/
-		std::vector<std::pair<Node*, float>> m_children;
+    /**
+        Pointer to the parent node.
+    */
+    Node *m_parent;
+
+    /**
+        List of all the node's children.
+    */
+    std::vector<std::pair<Node *, float>> m_children;
 };

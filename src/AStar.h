@@ -5,127 +5,108 @@
 #include "PathAlgorithm.h"
 #include "Node.h"
 
-class AStarNode : public Node
-{
-	public:
+class AStarNode : public Node {
+public:
 
-		AStarNode() :
-			m_f(0.0), m_g(0.0), m_h(0.0),
-			closed(false), open(false)
-		{}
+    AStarNode() : m_f(0.0), m_g(0.0), m_h(0.0), open(false), closed(false) { }
 
-		virtual ~AStarNode()
-		{}
+    virtual ~AStarNode();
 
-		void setPosition(int x, int y)
-		{
-			m_x = x;
-			m_y = y;
-		}
+    void setPosition(int x, int y) {
+        m_x = (unsigned int) x;
+        m_y = (unsigned int) y;
+    }
 
-		void setF(float f)
-		{
-			m_f = f;
-		}
+    void setF(float f) {
+        m_f = f;
+    }
 
-		void setG(float g)
-		{
-			m_g = g;
-		}
+    void setG(float g) {
+        m_g = g;
+    }
 
-		void setH(float h)
-		{
-			m_h = h;
-		}
+    void setH(float h) {
+        m_h = h;
+    }
 
-		void setOpen(bool value)
-		{
-			open = value;
-		}
+    void setOpen(bool value) {
+        open = value;
+    }
 
-		void setClosed(bool value)
-		{
-			closed = value;
-		}
+    void setClosed(bool value) {
+        closed = value;
+    }
 
-		inline unsigned int getX() const
-		{
-			return m_x;
-		}
+    inline unsigned int getX() const {
+        return m_x;
+    }
 
-		inline unsigned int getY() const
-		{
-			return m_y;
-		}
+    inline unsigned int getY() const {
+        return m_y;
+    }
 
-		inline float getF() const
-		{
-			return m_f;
-		}
+    inline float getF() const {
+        return m_f;
+    }
 
-		inline float getG() const
-		{
-			return m_g;
-		}
+    inline float getG() const {
+        return m_g;
+    }
 
-		inline float getH() const
-		{
-			return m_h;
-		}
+    inline float getH() const {
+        return m_h;
+    }
 
-		inline bool isOpen() const
-		{
-			return open;
-		}
+    inline bool isOpen() const {
+        return open;
+    }
 
-		inline bool isClosed() const
-		{
-			return closed;
-		}
+    inline bool isClosed() const {
+        return closed;
+    }
 
-		virtual float distanceTo(AStarNode* node) const = 0;
+    virtual float distanceTo(AStarNode *node) const = 0;
 
-		void release()
-		{
-			open = closed = false;
-			m_f = m_g = m_h = 0.0f;
-			m_parent = nullptr;
-		}
+    void release() {
+        open = closed = false;
+        m_f = m_g = m_h = 0.0f;
+        m_parent = nullptr;
+    }
 
-	protected:
-		float m_f, m_g, m_h;
-		unsigned int m_x, m_y;
-		bool open, closed;
+protected:
+    float m_f, m_g, m_h;
+    unsigned int m_x, m_y;
+    bool open, closed;
 };
 
-struct CompareNodes
-{
-	bool operator() (const AStarNode* s1, const AStarNode *s2) const
-	{
-		return s1->getF() < s2->getF();
-	}
+struct CompareNodes {
+    bool operator()(const AStarNode *s1, const AStarNode *s2) const {
+        return s1->getF() < s2->getF();
+    }
 };
 
-class AStar : public PathAlgorithm<AStarNode>
-{
-	public:
+class AStar : public PathAlgorithm<AStarNode> {
+public:
 
-		static AStar getInstance()
-		{
-			return AStar();
-		}
+    static AStar getInstance() {
+        return AStar();
+    }
 
-		bool getPath(AStarNode* start, AStarNode* goal, std::vector<AStarNode*>& path);
-		void clear();
-	    ~AStar();
+    bool getPath(AStarNode *start, AStarNode *goal, std::vector<AStarNode *> &path);
 
-	private:
+    void clear();
 
-		AStar();
+    virtual ~AStar();
 
-		void releaseNodes();
-		void pushOpen(AStarNode* node);
-		void popOpen(AStarNode* node);
-		
-		std::vector<AStarNode*> open, closed;
+private:
+
+    AStar();
+
+    void releaseNodes();
+
+    void pushOpen(AStarNode *node);
+
+    void popOpen(AStarNode *node);
+
+    std::vector<AStarNode *> open, closed;
 };
